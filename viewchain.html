@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>Medical data sharing</title>
+<style>
+
+.uploadSection{
+	padding-left: 38%;
+	height:50%;
+}
+
+.blockchainTable{
+	 padding-left: 30%;
+	height:50%;
+}
+
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+</style>
+</head>
+<body>
+    <nav class='navbar navbar-expand-lg navbar-dark bg-dark justify-content-between'>
+        <a href="/" class="navbar-brand p-2" style="font-size: 2vw;">Medical Data Sharing Application</a>
+        <ul class="navbar-nav">
+            <li class="nav-item mr-2">
+                <a href="/" class="nav-link">Upload a file</a>
+            </li>
+            <li class="nav-item">
+                <a href="/download" class="nav-link">Download a file</a>
+            </li>
+            <li class="nav-item">
+                <a href="/viewchain" class="nav-link">View Files Shared</a>
+            </li>
+        </ul>
+    </nav>
+
+<div class="blockchainTable">
+ {% if chain %}
+ {% for block in chain %}
+<table border=1 class="styled-table">
+  <tr>
+    <th>Block:</th>
+    <td width="80%">{{block.blockData("index")}}</td>
+  </tr>
+  <tr>
+    <th>Timestamp:</th>
+    <td>{{block.blockData("ts")}}</td>
+  </tr>
+  <tr>
+    <th>Proof:</th>
+    <td>{{block.blockData("Proof")}}</td>
+  </tr>
+
+  <tr>
+    <th>Previous Hash:</th>
+    <td>{{block.blockData("prev_hash")}}</td>
+  </tr>
+  
+  <tr>
+    <th>Sender:</th>
+    <td>{{block.blockData("Sender")}}</td>
+  </tr>
+
+  <tr>
+    <th>Receiver:</th>
+    <td>{{block.blockData("Receiver")}}</td>
+  </tr>
+  
+  <tr>
+    <th>Shared file:</th>
+    <td>{{block.blockData("file")}}</td>
+  </tr>
+  
+</table>
+        {% endfor %}
+        {% else %}
+        <p>No Chain yet</p>
+        {% endif %}
+</div>
+
+
+
+</body>
+</html>
